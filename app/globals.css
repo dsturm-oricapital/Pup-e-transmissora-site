@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #1f1f1f;
+  --color-secondary: #2a2a2a;
+  --color-accent: #1f1f1f;
+  --color-accent-light: #505050;
+  --color-background: #ffffff;
+  --color-foreground: #1f1f1f;
+  --color-muted: #505050;
+  --color-border: #e8e8e8;
+  --color-light-bg: #f9f9f9;
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+  --color-light-bg: var(--color-light-bg);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.8s ease-out;
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+.animate-expand-width {
+  opacity: 0;
+  animation: expandWidth 1s ease-out 0.6s forwards;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-600 {
+  animation-delay: 0.6s;
+}
