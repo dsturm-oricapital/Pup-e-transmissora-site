@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PuP-E Transmissora — Aquisição e Gestão de Ativos de Transmissão de Energia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1f1f1f;
+            --color-secondary: #2a2a2a;
+            --color-accent: #1f1f1f;
+            --color-accent-light: #505050;
+            --color-background: #ffffff;
+            --color-text: #1f1f1f;
+            --color-text-light: #505050;
+            --color-border: #e8e8e8;
+            --color-light-bg: #f9f9f9;
+            --color-line: #1f1f1f;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'IBM Plex Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            padding: 8rem 4rem 6rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-text-light);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--color-primary);
+            margin: 3rem 0;
+            opacity: 0;
+            animation: expandWidth 1s ease-out 0.6s forwards;
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 60px;
+                opacity: 1;
+            }
+        }
+
+        /* Platform Section */
+        .platform {
+            background: var(--color-light-bg);
+            padding: 6rem 4rem;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .platform-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .platform h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--color-primary);
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .platform-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .platform-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .feature-tag {
+            padding: 1rem 2.5rem;
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 0;
+            font-size: 0.95rem;
+            color: var(--color-text);
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .feature-tag:nth-child(1) { animation-delay: 0.2s; }
+        .feature-tag:nth-child(2) { animation-delay: 0.4s; }
+        .feature-tag:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-tag:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 2px 8px rgba(31, 31, 31, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Team Section */
+        .team {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .team h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-primary);
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem 3rem;
+        }
+
+        .team-member {
+            border-top: 2px solid var(--color-primary);
+            padding-top: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateX(8px);
+        }
+
+        .member-role {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-text-light);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .member-name {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--color-text-light);
+            font-weight: 300;
+        }
+
+        /* Values Section */
+        .values {
+            background: var(--color-primary);
+            color: white;
+            padding: 6rem 4rem;
+        }
+
+        .values-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .values h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .values-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .value-item {
+            display: flex;
+            align-items: baseline;
+            gap: 2rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.3);
+            padding-left: 2rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .value-item:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .value-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            min-width: 200px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .value-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 4rem;
+            text-align: center;
+            background: var(--color-light-bg);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .contact-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            line-height: 2;
+        }
+
+        .contact-info a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            color: var(--color-text-light);
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.05em;
+            margin-top: 3rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 4rem;
+            background: var(--color-secondary);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 4rem 2rem;
+                margin-top: 140px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .platform,
+            .team,
+            .values,
+            .contact {
+                padding: 4rem 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .value-title {
+                min-width: auto;
+            }
+
+            .platform-features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .feature-tag {
+                width: 100%;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo_pupe_transmissora_real.png" alt="PuP-E Transmissora">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#time">Time</a></li>
+                <li><a href="#valores">Valores</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PuP-E Transmissora</h1>
+            <div class="divider"></div>
+            <p class="hero-subtitle">
+                Retorno por meio da aquisição disciplinada, gestão eficiente e realocação de capital sustentável de ativos de transmissão de energia elétrica.
+            </p>
+            <p class="tagline">People, Utility, Partnership, Excellence</p>
+        </div>
+    </section>
+
+    <section class="platform" id="sobre">
+        <div class="platform-content">
+            <h2>Plataforma de longo prazo</h2>
+            <div class="platform-features">
+                <div class="feature-tag">Alinhamento de capital</div>
+                <div class="feature-tag">Execução rigorosa</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team" id="time">
+        <h2>Time</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-role">Presidente do Conselho</div>
+                <h3 class="member-name">Carlos Alberto Trindade Neto, CFA</h3>
+                <p class="member-bio">
+                    Sócio fundador da Ori Capital, onde atua como gestor dos fundos de ação. Anteriormente, foi membro do Conselho de Administração da TAESA, gestor da FIP Coliseu (responsável pela compra da Terna e criação da TAESA) e sócio do Banco Modal.
+                </p>
+            </div>
+
+            <div class="team-member">
+                <div class="member-role">CEO</div>
+                <h3 class="member-name">Paulo Ferreira</h3>
+                <p class="member-bio">
+                    Executivo com 20 anos de experiência no setor elétrico, sendo 16 anos dedicados à transmissão de energia.
+                    Atuou como CFO da Argo Energia, transmissora criada pelo Pátria em 2016. Nos últimos anos, concluiu com sucesso 8 transações de M&A e participou de mais de R$ 8 bilhões em operações de dívida e equity.
+                    Anteriormente, ocupou posições executivas na TAESA, Renova Energia, Sterlite e Shell.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="values" id="valores">
+        <div class="values-content">
+            <h2>Valores</h2>
+            <div class="values-list">
+                <div class="value-item">
+                    <div class="value-title">Disciplina</div>
+                    <div class="value-description">Rigor na análise, execução e alocação de capital com foco em retornos sustentáveis de longo prazo e em controle de risco de perda.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-title">Alinhamento/Partnership</div>
+                    <div class="value-description">Acreditamos em dividir para multiplicar e em skin in the game como forma de alinhamento e de incentivo a alta performance humana e empresarial.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-title">1 + 1 = 3</div>
+                    <div class="value-description">A força do time vem da sintonia, da comunicação e da confiança, não da competição entre si.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-title">Lucro, Resultados, Retorno</div>
+                    <div class="value-description">Lucro, resultado e retorno são pilares centrais da nossa engrenagem, que gera perpetuação, oportunidade e sustentabilidade para todos.</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-title">Visão de Longo Prazo</div>
+                    <div class="value-description">Decisões baseadas em perpetuação e geração de valor no longo prazo, mesmo que sacrificando otimizações de curto prazo.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contato">
+        <div class="contact-content">
+            <h2>Contato</h2>
+            <div class="contact-info">
+                
+                <p><a href="mailto:xptoenergia@xptoenergia.com.br">xptoenergia@xptoenergia.com.br</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 PuP-E Transmissora. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
