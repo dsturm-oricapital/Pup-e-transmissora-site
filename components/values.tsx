@@ -28,9 +28,9 @@ const values = [
 
 export function Values() {
   return (
-    <section id="valores" className="bg-[--color-primary] text-white px-16 py-24 max-md:px-8 max-md:py-16">
+    <section id="valores" className="bg-primary text-white px-16 py-24 max-md:px-8 max-md:py-16">
       <div className="max-w-[1000px] mx-auto">
-        <h2 className="font-serif text-5xl font-light mb-12 tracking-tight">
+        <h2 className="font-serif text-5xl font-light mb-12 tracking-tight text-white">
           Valores
         </h2>
         <div className="flex flex-col gap-10">
