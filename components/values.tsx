@@ -28,7 +28,7 @@ const values = [
 
 export function Values() {
   return (
-    <section id="valores" className="bg-primary text-white px-16 py-24 max-md:px-8 max-md:py-16">
+    <section id="valores" className="bg-[#2a2a2a] px-16 py-24 max-md:px-8 max-md:py-16">
       <div className="max-w-[1000px] mx-auto">
         <h2 className="font-serif text-5xl font-light mb-12 tracking-tight text-white">
           Valores
@@ -39,10 +39,10 @@ export function Values() {
               key={value.title}
               className="flex items-baseline gap-8 border-l-2 border-white/30 pl-8 transition-all hover:border-white/60 max-md:flex-col max-md:gap-2"
             >
-              <div className="font-serif text-2xl font-normal min-w-[200px] text-white/95 max-md:min-w-0">
+              <div className="font-serif text-2xl font-normal min-w-[200px] text-white max-md:min-w-0">
                 {value.title}
               </div>
-              <div className="text-base leading-relaxed text-white/85 font-light">
+              <div className="text-base leading-relaxed text-[#888] font-light">
                 {value.description}
               </div>
             </div>

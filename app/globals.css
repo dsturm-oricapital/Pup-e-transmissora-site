@@ -3,19 +3,23 @@
 @theme inline {
   --font-sans: "IBM Plex Sans", sans-serif;
   --font-serif: "Cormorant Garamond", serif;
-  --color-background: #ffffff;
-  --color-foreground: #1f1f1f;
-  --color-primary: #1f1f1f;
+  --color-background: #1f1f1f;
+  --color-foreground: #ffffff;
+  --color-primary: #ffffff;
   --color-secondary: #2a2a2a;
-  --color-muted: #505050;
-  --color-border: #e8e8e8;
-  --color-light-bg: #f9f9f9;
+  --color-muted: #888888;
+  --color-border: #333333;
+  --color-accent: #505050;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

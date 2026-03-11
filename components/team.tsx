@@ -14,22 +14,22 @@ const teamMembers = [
 export function Team() {
   return (
     <section id="time" className="px-16 py-24 max-w-[1400px] mx-auto max-md:px-8 max-md:py-16">
-      <h2 className="font-serif text-5xl font-light text-primary mb-16 text-center tracking-tight">
+      <h2 className="font-serif text-5xl font-light text-white mb-16 text-center tracking-tight">
         Time
       </h2>
       <div className="grid grid-cols-2 gap-16 gap-x-12 max-md:grid-cols-1">
         {teamMembers.map((member) => (
           <div
             key={member.name}
-            className="border-t-2 border-primary pt-8 transition-transform hover:translate-x-2"
+            className="border-t-2 border-white pt-8 transition-transform hover:translate-x-2"
           >
-            <div className="text-xs uppercase tracking-[0.15em] text-muted mb-3 font-semibold">
+            <div className="text-xs uppercase tracking-[0.15em] text-[#888] mb-3 font-semibold">
               {member.role}
             </div>
-            <h3 className="font-serif text-2xl font-medium text-primary mb-4">
+            <h3 className="font-serif text-2xl font-medium text-white mb-4">
               {member.name}
             </h3>
-            <p className="text-base leading-relaxed text-muted font-light">
+            <p className="text-base leading-relaxed text-[#888] font-light">
               {member.bio}
             </p>
           </div>
