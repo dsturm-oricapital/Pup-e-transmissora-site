@@ -300,10 +300,33 @@
         }
 
         .feature-text {
-            font-size: 1.15rem;
-            font-weight: 400;
-            color: var(--color-text);
-            letter-spacing: 0.01em;
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+            font-weight: 300;
+            color: var(--color-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .feature-expand {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.45s ease, opacity 0.35s ease;
+        }
+
+        .feature-item:hover .feature-expand {
+            max-height: 320px;
+            opacity: 1;
+        }
+
+        .feature-expand-text {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-text-light);
+            line-height: 1.85;
+            padding-top: 0.9rem;
+            padding-bottom: 0.25rem;
         }
 
         /* ── Team ── */
@@ -475,42 +498,44 @@
             max-width: var(--container-max);
             margin: 0 auto;
             padding: var(--section-pad-v) var(--section-pad-h);
+        }
+
+        .contact .section-label {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 3rem;
+            flex-direction: column;
         }
 
-        .contact h2 {
-            font-family: var(--font-display);
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-            font-weight: 300;
-            color: var(--color-primary);
-            letter-spacing: -0.01em;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-sub {
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
-            font-weight: 300;
-        }
-
-        .contact-link {
-            display: inline-block;
-            font-size: 0.88rem;
-            font-weight: 400;
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-border);
             color: var(--color-primary);
             text-decoration: none;
-            border-bottom: 1px solid var(--color-primary);
-            padding-bottom: 2px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
             transition: opacity 0.25s ease;
-            white-space: nowrap;
         }
 
-        .contact-link:hover {
-            opacity: 0.5;
+        .contact-info-item:first-child {
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact-info-item:hover {
+            opacity: 0.45;
+        }
+
+        .contact-icon {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+            opacity: 0.55;
         }
 
         /* ── Footer ── */
@@ -557,12 +582,6 @@
             .platform-inner {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
-            }
-
-            .contact-inner {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2rem;
             }
         }
 
@@ -656,9 +675,6 @@
                 font-size: 1.4rem;
             }
 
-            .contact h2 {
-                font-size: 1.8rem;
-            }
         }
     </style>
 </head>
@@ -701,9 +717,15 @@
             <div class="platform-right">
                 <div class="feature-item reveal reveal-delay-1">
                     <span class="feature-text">Alinhamento de capital</span>
+                    <div class="feature-expand">
+                        <p class="feature-expand-text">A estrutura da PuP-E é concebida para atrair e reter capital com horizonte de longo prazo. Investidores e operadores compartilham os mesmos objetivos, riscos e incentivos — garantindo que as decisões de alocação estejam sempre orientadas à criação de valor sustentável, e não a retornos de curto prazo que comprometem a qualidade dos ativos e a solidez da operação.</p>
+                    </div>
                 </div>
                 <div class="feature-item reveal reveal-delay-2">
                     <span class="feature-text">Execução rigorosa</span>
+                    <div class="feature-expand">
+                        <p class="feature-expand-text">Da originação ao fechamento, cada etapa do processo é conduzida com critério analítico e disciplina operacional. A equipe combina experiência regulatória, financeira e técnica para entregar transações estruturadas com precisão — minimizando riscos de execução e maximizando a previsibilidade dos retornos ao longo de toda a vida útil do ativo.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -764,13 +786,24 @@
 
     <section class="contact" id="contato">
         <div class="contact-inner">
-            <div class="reveal">
-                <h2>Contato</h2>
-                <p class="contact-sub">Entre em contato para saber mais sobre a plataforma.</p>
+            <p class="section-label reveal">Contato</p>
+            <div class="contact-info reveal reveal-delay-1">
+                <a href="mailto:xptoenergia@xptoenergia.com.br" class="contact-info-item">
+                    xptoenergia@xptoenergia.com.br
+                </a>
+                <a href="tel:+551100000000" class="contact-info-item">
+                    +55 11 0000-0000
+                </a>
+                <a href="https://linkedin.com/company/pup-e-transmissora" class="contact-info-item" target="_blank" rel="noopener">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M7 10v7M7 7.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M11 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M11 10v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    PuP-E Transmissora
+                </a>
             </div>
-            <a href="mailto:xptoenergia@xptoenergia.com.br" class="contact-link reveal reveal-delay-1">
-                xptoenergia@xptoenergia.com.br
-            </a>
         </div>
     </section>
 
