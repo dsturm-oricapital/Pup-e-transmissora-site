@@ -193,11 +193,6 @@
             animation: fadeUp 0.9s ease 0.2s forwards;
         }
 
-        .hero h1 em {
-            font-style: italic;
-            font-weight: 300;
-        }
-
         .divider {
             width: 40px;
             height: 1px;
@@ -267,34 +262,31 @@
         .platform-right {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 0;
             padding-top: 0.5rem;
         }
 
         .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.25rem;
-            padding-bottom: 1.5rem;
+            padding: 1.25rem 0;
             border-bottom: 1px solid var(--color-border);
+            transition: background 0.3s ease;
+            cursor: default;
+        }
+
+        .feature-item:first-child {
+            border-top: 1px solid var(--color-border);
         }
 
         .feature-item:last-child {
             border-bottom: none;
-            padding-bottom: 0;
         }
 
-        .feature-number {
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            color: var(--color-text-muted);
-            padding-top: 0.2rem;
-            min-width: 24px;
+        .feature-item:hover {
+            background: #ffffff;
         }
 
         .feature-text {
-            font-size: 0.95rem;
+            font-size: 1.15rem;
             font-weight: 400;
             color: var(--color-text);
             letter-spacing: 0.01em;
@@ -308,30 +300,28 @@
         }
 
         .section-label {
-            font-size: 0.72rem;
+            font-size: 1rem;
             letter-spacing: 0.18em;
             text-transform: uppercase;
             color: var(--color-text-muted);
             font-weight: 400;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .team-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0;
-            border-top: 1px solid var(--color-border);
         }
 
         .team-member {
-            padding: 2.5rem 2.5rem 2.5rem 0;
+            padding: 2.5rem 3rem 2.5rem 0;
             border-right: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
             transition: background 0.3s ease;
         }
 
         .team-member:nth-child(even) {
-            padding: 2.5rem 0 2.5rem 2.5rem;
+            padding: 2.5rem 0 2.5rem 3rem;
             border-right: none;
         }
 
@@ -376,19 +366,13 @@
             padding: var(--section-pad-v) var(--section-pad-h);
         }
 
-        .values-header {
-            display: flex;
-            align-items: baseline;
-            gap: 3rem;
-            margin-bottom: 3.5rem;
-        }
-
         .values h2 {
             font-family: var(--font-display);
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 300;
             letter-spacing: -0.01em;
             line-height: 1;
+            margin-bottom: 3.5rem;
         }
 
         .values-list {
@@ -397,41 +381,41 @@
         }
 
         .value-item {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            gap: 2rem;
-            padding: 1.75rem 0;
+            display: block;
+            padding: 1.75rem var(--section-pad-h);
+            margin: 0 calc(-1 * var(--section-pad-h));
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            align-items: start;
-            transition: border-color 0.3s ease;
+            transition: background 0.3s ease;
+            cursor: default;
         }
 
-        .value-item:first-child {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        .value-item:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .value-index {
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.3);
-            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 0.35rem;
             font-weight: 400;
         }
 
         .value-title {
             font-family: var(--font-display);
-            font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+            font-size: clamp(1.15rem, 1.8vw, 1.4rem);
             font-weight: 400;
             color: rgba(255, 255, 255, 0.92);
             line-height: 1.3;
+            margin-bottom: 0.75rem;
         }
 
         .value-description {
             font-size: 0.88rem;
             line-height: 1.85;
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 300;
-            padding-top: 0.2rem;
+            text-align: right;
         }
 
         /* ── Contact ── */
@@ -484,15 +468,20 @@
 
         /* ── Footer ── */
         footer {
-            padding: 2rem var(--section-pad-h);
             background: var(--color-secondary);
             color: rgba(255, 255, 255, 0.35);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             font-size: 0.75rem;
             font-weight: 300;
             letter-spacing: 0.05em;
+        }
+
+        .footer-inner {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 2rem var(--section-pad-h);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* ── Scroll reveal ── */
@@ -588,17 +577,16 @@
             .team-member:nth-child(even) {
                 padding: 2rem 0;
                 border-right: none;
+                border-bottom: 1px solid var(--color-border);
             }
 
             .team-member:last-child {
                 border-bottom: none;
             }
 
-            /* Values: coluna única */
+            /* Values: padding reduzido no mobile */
             .value-item {
-                grid-template-columns: 1fr;
-                gap: 0.6rem;
-                padding: 1.5rem 0;
+                padding: 1.5rem var(--section-pad-h);
             }
 
             .values h2 {
@@ -606,7 +594,7 @@
             }
 
             /* Footer simplificado */
-            footer {
+            .footer-inner {
                 flex-direction: column;
                 gap: 0.5rem;
                 text-align: center;
@@ -653,7 +641,7 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-label">Transmissão de energia elétrica</p>
-            <h1>PuP-E<br><em>Transmissora</em></h1>
+            <h1>PuP-E<br>Transmissora</h1>
             <div class="divider"></div>
             <p class="hero-subtitle">
                 Retorno por meio da aquisição disciplinada, gestão eficiente e realocação de capital sustentável de ativos de transmissão de energia elétrica.
@@ -667,11 +655,9 @@
             <h2 class="reveal">Plataforma<br>de longo prazo</h2>
             <div class="platform-right">
                 <div class="feature-item reveal reveal-delay-1">
-                    <span class="feature-number">01</span>
                     <span class="feature-text">Alinhamento de capital</span>
                 </div>
                 <div class="feature-item reveal reveal-delay-2">
-                    <span class="feature-number">02</span>
                     <span class="feature-text">Execução rigorosa</span>
                 </div>
             </div>
@@ -703,38 +689,28 @@
             <h2 class="reveal">Valores</h2>
             <div class="values-list">
                 <div class="value-item reveal reveal-delay-1">
-                    <div>
-                        <div class="value-index">01</div>
-                        <div class="value-title">Disciplina</div>
-                    </div>
+                    <div class="value-index">01</div>
+                    <div class="value-title">Disciplina</div>
                     <div class="value-description">Rigor na análise, execução e alocação de capital com foco em retornos sustentáveis de longo prazo e em controle de risco de perda.</div>
                 </div>
                 <div class="value-item reveal reveal-delay-2">
-                    <div>
-                        <div class="value-index">02</div>
-                        <div class="value-title">Alinhamento / Partnership</div>
-                    </div>
+                    <div class="value-index">02</div>
+                    <div class="value-title">Alinhamento / Partnership</div>
                     <div class="value-description">Acreditamos em dividir para multiplicar e em skin in the game como forma de alinhamento e de incentivo à alta performance humana e empresarial.</div>
                 </div>
                 <div class="value-item reveal reveal-delay-3">
-                    <div>
-                        <div class="value-index">03</div>
-                        <div class="value-title">1 + 1 = 3</div>
-                    </div>
+                    <div class="value-index">03</div>
+                    <div class="value-title">1 + 1 = 3</div>
                     <div class="value-description">A força do time vem da sintonia, da comunicação e da confiança, não da competição entre si.</div>
                 </div>
                 <div class="value-item reveal reveal-delay-4">
-                    <div>
-                        <div class="value-index">04</div>
-                        <div class="value-title">Lucro, Resultados, Retorno</div>
-                    </div>
+                    <div class="value-index">04</div>
+                    <div class="value-title">Lucro, Resultados, Retorno</div>
                     <div class="value-description">Lucro, resultado e retorno são pilares centrais da nossa engrenagem, que gera perpetuação, oportunidade e sustentabilidade para todos.</div>
                 </div>
                 <div class="value-item reveal">
-                    <div>
-                        <div class="value-index">05</div>
-                        <div class="value-title">Visão de Longo Prazo</div>
-                    </div>
+                    <div class="value-index">05</div>
+                    <div class="value-title">Visão de Longo Prazo</div>
                     <div class="value-description">Decisões baseadas em perpetuação e geração de valor no longo prazo, mesmo que sacrificando otimizações de curto prazo.</div>
                 </div>
             </div>
@@ -754,8 +730,10 @@
     </section>
 
     <footer>
-        <span>PuP-E Transmissora</span>
-        <span>&copy; 2026. Todos os direitos reservados.</span>
+        <div class="footer-inner">
+            <span>PuP-E Transmissora</span>
+            <span>&copy; 2026. Todos os direitos reservados.</span>
+        </div>
     </footer>
 
     <script>
