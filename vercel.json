@@ -1,1 +1,13 @@
-
+{
+  "rewrites": [
+    { "source": "/paulo", "destination": "/paulo/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/paulo/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
+  ]
+}
