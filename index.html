@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PuP-E Transmissora — Aquisição e Gestão de Ativos de Transmissão de Energia</title>
+    <title>PUP-e Transmissora — Aquisição e Gestão de Ativos de Transmissão de Energia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
         }
 
         .logo img {
-            height: 48px;
+            height: 36px;
             width: auto;
             object-fit: contain;
         }
@@ -223,6 +223,14 @@
             animation: fadeUp 0.9s ease 0.8s forwards;
         }
 
+        .tagline-dash {
+            font-style: italic;
+            font-family: var(--font-display);
+            letter-spacing: 0;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(16px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -270,10 +278,11 @@
             position: relative;
             z-index: 0;
             padding: 1.25rem 0;
-            border-bottom: 1px solid var(--color-border);
-            cursor: default;
+            border-bottom: none;
+            cursor: pointer;
         }
 
+        /* Hover background */
         .feature-item::before {
             content: '';
             position: absolute;
@@ -287,16 +296,44 @@
             z-index: -1;
         }
 
-        .feature-item:hover::before {
+        .feature-item:hover::before,
+        .feature-item.is-open::before {
             opacity: 1;
+        }
+
+        /* Bottom border via ::after, extends on open */
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--color-border);
+            transition: left 0.35s ease, right 0.35s ease;
+            z-index: 1;
+        }
+
+        .feature-item:hover::after,
+        .feature-item.is-open::after {
+            left: -1.5rem;
+            right: -1.5rem;
+        }
+
+        .feature-item:last-child::after {
+            display: none;
         }
 
         .feature-item:first-child {
             border-top: 1px solid var(--color-border);
         }
 
-        .feature-item:last-child {
-            border-bottom: none;
+        /* Header row with toggle icon */
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
         }
 
         .feature-text {
@@ -307,6 +344,41 @@
             letter-spacing: -0.01em;
         }
 
+        .feature-toggle {
+            width: 22px;
+            height: 22px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .feature-toggle::before,
+        .feature-toggle::after {
+            content: '';
+            position: absolute;
+            background: var(--color-text-muted);
+            top: 50%;
+            left: 50%;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .feature-toggle::before {
+            width: 11px;
+            height: 1px;
+            transform: translate(-50%, -50%);
+        }
+
+        .feature-toggle::after {
+            width: 1px;
+            height: 11px;
+            transform: translate(-50%, -50%);
+        }
+
+        .feature-item.is-open .feature-toggle::after {
+            transform: translate(-50%, -50%) scaleY(0);
+            opacity: 0;
+        }
+
+        /* Expand panel */
         .feature-expand {
             max-height: 0;
             overflow: hidden;
@@ -314,7 +386,7 @@
             transition: max-height 0.45s ease, opacity 0.35s ease;
         }
 
-        .feature-item:hover .feature-expand {
+        .feature-item.is-open .feature-expand {
             max-height: 320px;
             opacity: 1;
         }
@@ -326,7 +398,7 @@
             color: var(--color-text-light);
             line-height: 1.85;
             padding-top: 0.9rem;
-            padding-bottom: 0.25rem;
+            padding-bottom: 0.5rem;
         }
 
         /* ── Team ── */
@@ -443,10 +515,11 @@
             z-index: 0;
             display: block;
             padding: 1.75rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: none;
             cursor: default;
         }
 
+        /* Hover background */
         .value-item::before {
             content: '';
             position: absolute;
@@ -462,6 +535,28 @@
 
         .value-item:hover::before {
             opacity: 1;
+        }
+
+        /* Bottom border, extends on hover */
+        .value-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            transition: left 0.35s ease, right 0.35s ease;
+            z-index: 1;
+        }
+
+        .value-item:hover::after {
+            left: -1rem;
+            right: -1rem;
+        }
+
+        .value-item:last-child::after {
+            display: none;
         }
 
         .value-index {
@@ -682,8 +777,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="logo_pupe_transmissora_real.png" alt="PuP-E Transmissora" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                <span class="logo-text" style="display:none">PuP-E Transmissora</span>
+                <img src="logo.png" alt="PUP-e Transmissora">
             </div>
             <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
                 <span></span>
@@ -702,12 +796,12 @@
     <section class="hero">
         <div class="hero-content">
             <p class="hero-label">Transmissão de energia elétrica</p>
-            <h1>PuP-E<br>Transmissora</h1>
+            <h1>PUP-e<br>Transmissora</h1>
             <div class="divider"></div>
             <p class="hero-subtitle">
                 Retorno por meio da aquisição disciplinada, gestão eficiente e realocação de capital sustentável de ativos de transmissão de energia elétrica.
             </p>
-            <p class="hero-tagline">People · Utility · Partnership · Excellence</p>
+            <p class="hero-tagline">People Utility Partnership <span class="tagline-dash">—</span> Excellence</p>
         </div>
     </section>
 
@@ -716,15 +810,21 @@
             <h2 class="reveal">Plataforma<br>de longo prazo</h2>
             <div class="platform-right">
                 <div class="feature-item reveal reveal-delay-1">
-                    <span class="feature-text">Alinhamento de capital</span>
+                    <div class="feature-header">
+                        <span class="feature-text">Alinhamento de capital</span>
+                        <span class="feature-toggle" aria-hidden="true"></span>
+                    </div>
                     <div class="feature-expand">
-                        <p class="feature-expand-text">A estrutura da PuP-E é concebida para atrair e reter capital com horizonte de longo prazo. Investidores e operadores compartilham os mesmos objetivos, riscos e incentivos — garantindo que as decisões de alocação estejam sempre orientadas à criação de valor sustentável, e não a retornos de curto prazo que comprometem a qualidade dos ativos e a solidez da operação.</p>
+                        <p class="feature-expand-text">A PUP-e foi concebida com capital permanente e estrutura de partnership para garantir que as decisões operacionais e de alocação de capital estejam sempre orientadas à criação de valor sustentável, e não a retornos de curto prazo que comprometem a qualidade dos ativos e a solidez da operação.</p>
                     </div>
                 </div>
                 <div class="feature-item reveal reveal-delay-2">
-                    <span class="feature-text">Execução rigorosa</span>
+                    <div class="feature-header">
+                        <span class="feature-text">Execução rigorosa</span>
+                        <span class="feature-toggle" aria-hidden="true"></span>
+                    </div>
                     <div class="feature-expand">
-                        <p class="feature-expand-text">Da originação ao fechamento, cada etapa do processo é conduzida com critério analítico e disciplina operacional. A equipe combina experiência regulatória, financeira e técnica para entregar transações estruturadas com precisão — minimizando riscos de execução e maximizando a previsibilidade dos retornos ao longo de toda a vida útil do ativo.</p>
+                        <p class="feature-expand-text">Cada etapa do processo é conduzida com rigor, foco e orientação a resultado, da originação ao fechamento e execução operacional dos ativos.</p>
                     </div>
                 </div>
             </div>
@@ -735,14 +835,12 @@
         <p class="section-label reveal">Time</p>
         <div class="team-grid">
             <div class="team-member reveal reveal-delay-1">
-                <div class="member-role">Presidente do Conselho</div>
                 <h3 class="member-name">Carlos Alberto Trindade Neto, CFA</h3>
                 <p class="member-bio">
                     Sócio fundador da Ori Capital, onde atua como gestor dos fundos de ação. Anteriormente, foi membro do Conselho de Administração da TAESA, gestor da FIP Coliseu (responsável pela compra da Terna e criação da TAESA) e sócio do Banco Modal.
                 </p>
             </div>
             <div class="team-member reveal reveal-delay-2">
-                <div class="member-role">CEO</div>
                 <h3 class="member-name">Paulo Ferreira</h3>
                 <p class="member-bio">
                     Executivo com 20 anos de experiência no setor elétrico, sendo 16 anos dedicados à transmissão de energia. Atuou como CFO da Argo Energia, transmissora criada pelo Pátria em 2016. Nos últimos anos, concluiu com sucesso 8 transações de M&A e participou de mais de R$ 8 bilhões em operações de dívida e equity. Anteriormente, ocupou posições executivas na TAESA, Renova Energia, Sterlite e Shell.
@@ -788,12 +886,14 @@
         <div class="contact-inner">
             <p class="section-label reveal">Contato</p>
             <div class="contact-info reveal reveal-delay-1">
-                <a href="mailto:xptoenergia@xptoenergia.com.br" class="contact-info-item">
-                    xptoenergia@xptoenergia.com.br
+                <a href="mailto:contato@pupetransmissora.com.br" class="contact-info-item">
+                    contato@pupetransmissora.com.br
                 </a>
+                <!-- telefone oculto temporariamente
                 <a href="tel:+551100000000" class="contact-info-item">
                     +55 11 0000-0000
                 </a>
+                -->
                 <a href="https://linkedin.com/company/pup-e-transmissora" class="contact-info-item" target="_blank" rel="noopener">
                     <svg class="contact-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/>
@@ -801,7 +901,7 @@
                         <path d="M11 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                         <path d="M11 10v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
-                    PuP-E Transmissora
+                    PUP-e Transmissora
                 </a>
             </div>
         </div>
@@ -809,7 +909,7 @@
 
     <footer>
         <div class="footer-inner">
-            <span>PuP-E Transmissora</span>
+            <span>PUP-e Transmissora</span>
             <span>&copy; 2026. Todos os direitos reservados.</span>
         </div>
     </footer>
@@ -844,6 +944,14 @@
         }, { threshold: 0.12 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Accordion: click to toggle feature items
+        document.querySelectorAll('.feature-item').forEach(item => {
+            item.querySelector('.feature-header').addEventListener('click', () => {
+                const isOpen = item.classList.toggle('is-open');
+                item.querySelector('.feature-header').setAttribute('aria-expanded', isOpen);
+            });
+        });
     </script>
 </body>
 </html>
