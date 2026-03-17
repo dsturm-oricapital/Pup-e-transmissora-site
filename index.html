@@ -890,8 +890,8 @@
         <div class="contact-inner">
             <p class="section-label reveal">Contato</p>
             <div class="contact-info reveal reveal-delay-1">
-                <a href="/cdn-cgi/l/email-protection#a2c1cdccd6c3d6cde2d2d7d2c7d6d0c3ccd1cfcbd1d1cdd0c38cc1cdcf8cc0d0" class="contact-info-item">
-                    <span class="__cf_email__" data-cfemail="ec8f8382988d9883ac9c999c89989e8d829f81859f9f839e8dc28f8381c28e9e">[email&#160;protected]</span>
+                <a href="mailto:contato@pupetransmissora.com.br" class="contact-info-item">
+                    contato@pupetransmissora.com.br
                 </a>
                 <!-- telefone oculto temporariamente
                 <a href="tel:+551100000000" class="contact-info-item">
@@ -923,7 +923,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Menu hambúrguer
         const toggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
@@ -956,4 +956,11 @@
 
         // Accordion: click to toggle feature items
         document.querySelectorAll('.feature-item').forEach(item => {
-            item.querySelector('.
+            item.querySelector('.feature-header').addEventListener('click', () => {
+                const isOpen = item.classList.toggle('is-open');
+                item.querySelector('.feature-header').setAttribute('aria-expanded', isOpen);
+            });
+        });
+    </script>
+</body>
+</html>
